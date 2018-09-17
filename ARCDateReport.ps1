@@ -1,7 +1,7 @@
 #Script for determining number of items in users mailboxes from certain date range
 #Gets date for CSV formatting
 $CurrentDate = Get-Date
-$CurrentDate = $CurrentDate.ToString('yyyy-dd-hhmmss')
+$CurrentDate = $CurrentDate.ToString('yyyy-dd-hhmm')
 #Require for local execution
 Set-ExecutionPolicy RemoteSigned
 #Must enter admin creds with proper Exchange permissions or this WILL NOT WORK! If unsure about RABC permisissions get with Ryan.
