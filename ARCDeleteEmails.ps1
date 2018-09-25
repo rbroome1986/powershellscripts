@@ -13,4 +13,4 @@ $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri ht
 #Connection to O365
 Import-PSSession $Session -DisableNameChecking
 #Script below searchs all mailboxes and deletes for date range. 
-Get-Mailbox -identity $username | Search-Mailbox -searchQuery 'Received:01/01/1990..12/31/2017 OR Sent:01/01/1990..12/31/2017' -deletecontent | Export-CSV -Path "$PSScriptRoot\DateQuery_$currentdate.csv"
+Get-Mailbox -identity $username | Search-Mailbox -searchQuery 'Kind:email AND (Received:01/01/1990..12/31/2017 OR Sent:01/01/1990..12/31/2017)' -deletecontent | Export-CSV -Path "$PSScriptRoot\DateQuery_$currentdate.csv"
