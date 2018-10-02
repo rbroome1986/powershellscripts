@@ -2,6 +2,7 @@
 #Gets date for CSV formatting
 $CurrentDate = Get-Date
 $CurrentDate = $CurrentDate.ToString('yyyy--mm-dd-hhmmss')
+$usermailbox = Read-Host "Tell me which user you want to check folders for okay"
 #Require for local execution
 Set-ExecutionPolicy RemoteSigned
 #Must enter admin creds with proper Exchange permissions or this WILL NOT WORK! If unsure about RABC permisissions get with Ryan.
@@ -11,4 +12,4 @@ $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri ht
 #Connection to O365
 Import-PSSession $Session -DisableNameChecking
 #Script below searchs all mailboxes, deletes empty folders, and exports csv results for all empty folders. 
-Get-Mailbox | Get-MailboxFolderStatistics | Where {$_.ItemsInFolder -eq '0'}  | Where {$_.FolderType -eq 'User Created'} | Where {$_.FolderPath -notlike "/Sync Issues" -and -notlike "/RSS Feeds" -and -notlike "/Working Set" -and -notlike "/Quick Step Settings"} | Remove-items | Select -Property Identity, FolderPath, FolderType, FolderSize, ItemsInFolder |  Export-CSV -Path "$PSScriptRoot\FolderQuery_$currentdate.csv"
+Get-Mailbox -identity $usermailbox | Get-MailboxFolderStatistics | Select -Property Identity, FolderPath, FolderType, FolderSize, ItemsInFolder |  Export-CSV -Path "$PSScriptRoot\FolderQuery_$currentdate.csv"

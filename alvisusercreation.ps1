@@ -36,7 +36,7 @@
 
 <# Start Script #>
 #Import the CSV file for creating users
-$UserFile = Get-FileName "\\ALV-FS1\New User Input\newusr.csv"
+$UserFile = Get-FileName "\\ARCWOWFS1.internal.arcind.com\New User Input\newusr.csv"
 $UserList = Import-csv $UserFile
 
 
